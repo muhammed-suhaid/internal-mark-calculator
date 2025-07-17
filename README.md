@@ -36,4 +36,4 @@ This is a simple full-stack **Internal Mark Calculator Web App** built using **R
 
 ## Clone the Repository
 ```bash
-git clone https://github.com/muhammed-suhaid/internal-mark-calculator.git
+git clone https://github.com/muhammed-suhaid/internal-mark-calculator-web-app.git
