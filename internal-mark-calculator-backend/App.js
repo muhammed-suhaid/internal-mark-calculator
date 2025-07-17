@@ -11,6 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 mongoose.connect(mongoUrl)
 
+// Storing data to database
 app.post("/internal-mark", (request, response) => {
     // Data requesting from user
     const getName = (request.body.name)
@@ -49,7 +50,6 @@ app.post("/internal-mark", (request, response) => {
     )
     data_store.save()
 
-
     // Response to user
     response.json({
         "status": "Internal mark calculated",
@@ -63,6 +63,18 @@ app.post("/internal-mark", (request, response) => {
             "TotalInternalMark": totalInternalMark,
         }
     })
+})
+
+// fetching data from database
+app.post("/view-all", (request, response) => {
+    internalMarkModel.find().then(
+        (items) => {
+            response.json({
+                "status": "Successfully fetched",
+                "result": items
+            })
+        }
+    )
 })
 
 app.listen(4000, () => {
