@@ -29,6 +29,8 @@ const AddDetails = () => {
         }
     })
 
+    const [isData, changeIsData] = useState(false)
+
     const inputHandler = (event) => {
         changeInput({ ...input, [event.target.name]: event.target.value })
     }
@@ -37,7 +39,8 @@ const AddDetails = () => {
         axios.post("http://localhost:4000/internal-mark", input)
             .then((response) => {
                 console.log("Response : ", response.data)
-                changeOutput(response.data);
+                changeOutput(response.data)
+                changeIsData(true)
             })
             .catch(() => { console.log("Something went wrong") })
     }
@@ -90,23 +93,24 @@ const AddDetails = () => {
                                 </div>
                             </div>
                             {/* Display Card */}
-                            <div className="mt-4 col-12 col-md-6 mx-auto">
-                                <div className="card shadow">
-                                    <div className="card-body">
-                                        <h5 className="card-title">Internal Mark Result</h5>
-                                        <p className="card-text"><strong>Name:</strong> {output.result.name}</p>
-                                        <p className="card-text"><strong>Adm No:</strong> {output.result.admNo}</p>
-                                        <p className="card-text"><strong>Subject:</strong> {output.result.subjectName}</p>
-                                        <p className="card-text"><strong>Attendance:</strong> {output.result.Attendance}</p>
-                                        <p className="card-text"><strong>Exam Mark:</strong> {output.result.TotalExamMark}</p>
-                                        <p className="card-text"><strong>Assignment Mark:</strong> {output.result.TotalAssignmentMark}</p>
-                                        <hr />
-                                        <p className="card-text text-success fw-bold fs-5">
-                                            Total Internal Mark: {output.result.TotalInternalMark}
-                                        </p>
+                            {isData &&
+                                <div className="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                                    <div className="card shadow">
+                                        <div className="card-body">
+                                            <h5 className="card-title" align="center">Internal Mark Result</h5>
+                                            <p className="card-text"><strong>Name:</strong> {output.result.name}</p>
+                                            <p className="card-text"><strong>Adm No:</strong> {output.result.admNo}</p>
+                                            <p className="card-text"><strong>Subject:</strong> {output.result.subjectName}</p>
+                                            <p className="card-text"><strong>Attendance:</strong> {output.result.Attendance}</p>
+                                            <p className="card-text"><strong>Exam Mark:</strong> {output.result.TotalExamMark}</p>
+                                            <p className="card-text"><strong>Assignment Mark:</strong> {output.result.TotalAssignmentMark}</p>
+                                            <hr />
+                                            <p className="card-text text-success fw-bold fs-5">
+                                                Total Internal Mark: {output.result.TotalInternalMark}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>}
                         </div>
                     </div>
                 </div>
